@@ -47,10 +47,10 @@ module "r53" {
 ##--------------/route53
 
 ##--------------cert manager
-resource "aws_acm_certificate" "certificate" {
+resource "aws_acm_certificate" "certificate" { //ensure that domain is verified ownership before apply or the cf distro will fail
   domain_name       = "*.${var.root_domain_name}"
   provider          = "aws.use1"
-  validation_method = "DNS"
+  validation_method = "${var.validation_method}"
   subject_alternative_names = ["${var.root_domain_name}"]
 }
 ##--------------/cert manager
