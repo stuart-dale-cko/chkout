@@ -32,21 +32,3 @@ data "aws_iam_policy_document" "www_s3_policyDoc" {
   }
 }
 
-##----------fileupload
-resource "aws_s3_bucket_object" "index_html" {
-  bucket       = "${aws_s3_bucket.www.id}"
-  key          = "index.html"
-  source       = "${path.module}/html/index.html"
-  content_type = "text/html"
-
-  etag = "${md5(file("${path.module}/html/index.html"))}"
-}
-
-resource "aws_s3_bucket_object" "error_html" {
-  bucket       = "${aws_s3_bucket.www.id}"
-  key          = "error.html"
-  source       = "${path.module}/html/error.html"
-  content_type = "text/html"
-
-  etag = "${md5(file("${path.module}/html/error.html"))}"
-}
