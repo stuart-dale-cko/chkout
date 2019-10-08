@@ -1,3 +1,4 @@
+##todo relocate the polcies to the json file to keep this file easy to ready
 resource "aws_s3_bucket" "build_artifact_bucket" {
   bucket = "${var.pipeline_name}-artifact-bucket"
   acl    = "private"

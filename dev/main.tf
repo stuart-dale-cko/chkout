@@ -51,7 +51,7 @@ module "r53" {
 
 ##--------------cert manager
 resource "aws_acm_certificate" "certificate" {
-  domain_name               = "*.${var.root_domain_name}" //ensure that domain is verified ownership before apply or the cf distro will fail
+  domain_name               = "*.${var.root_domain_name}" //ensure that domain is verified ownership before apply or the cf distro will fail NB remove this from state file next and use as a datasource instead, requires that the domain is provisoned first
   provider                  = "aws.use1"
   validation_method         = "${var.validation_method}"
   subject_alternative_names = ["${var.root_domain_name}"]
