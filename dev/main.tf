@@ -10,12 +10,12 @@ terraform {
   provider "aws" {
     region = "eu-west-1"
   }
-
 }
-  provider "aws" {
-// us-east-1 instance alias for creation of the cf cert
+
+provider "aws" {
+  // us-east-1 instance alias for creation of the cf cert
   region = "us-east-1"
-  alias = "use1"
+  alias  = "use1"
 }
 
 ##--------------s3
@@ -25,6 +25,7 @@ module "s3-www" {
   bucketName = "${var.www_domain_name}"
   commonTags = "${var.commonTags}"
 }
+
 ##--------------/s3
 
 ##--------------cloudfront
@@ -34,6 +35,7 @@ module "cloudfront" {
   www_domain_name  = "${var.www_domain_name}"
   website_endpoint = "${module.s3-www.website_endpoint}"
 }
+
 ##--------------/cloudfront
 
 ##--------------route53
@@ -44,35 +46,39 @@ module "r53" {
   r53AliasForDomainName = "${module.cloudfront.domainName}"
   r53AliasForHostedZone = "${module.cloudfront.zoneId}"
 }
+
 ##--------------/route53
 
 ##--------------cert manager
-resource "aws_acm_certificate" "certificate" { //ensure that domain is verified ownership before apply or the cf distro will fail
-  domain_name       = "*.${var.root_domain_name}"
-  provider          = "aws.use1"
-  validation_method = "${var.validation_method}"
+resource "aws_acm_certificate" "certificate" {
+  domain_name               = "*.${var.root_domain_name}" //ensure that domain is verified ownership before apply or the cf distro will fail
+  provider                  = "aws.use1"
+  validation_method         = "${var.validation_method}"
   subject_alternative_names = ["${var.root_domain_name}"]
 }
+
 ##--------------/cert manager
 
 ##--------------cloudwatch metric alerts for cloudfront
 module "cfCloudwatch" {
-  source = "../modules/cloudwatchAlarm"
-  alarmActionsEnabled = "true"
-  topicArn = "${aws_sns_topic.dev-sns.arn}"
+  source                 = "../modules/cloudwatchAlarm"
+  alarmActionsEnabled    = "true"
+  topicArn               = "${aws_sns_topic.dev-sns.arn}"
   cloudfrontDistribution = "${module.cloudfront.cfDistributionId}"
-  commonTags = "${var.commonTags}"
-
+  commonTags             = "${var.commonTags}"
 }
+
 resource "aws_sns_topic" "dev-sns" {
-  name = "dev${lower(var.commonTags["environment"])}Alert"
+  name         = "dev${lower(var.commonTags["environment"])}Alert"
   display_name = "dev${lower(var.commonTags["environment"])}"
 }
+
 ##--------------/cloudwatch metric alerts for cloudfront
 #=====pipeline stuff
 module "codepipeline" {
-  pipeline_name = "${var.pipelineName}"
+  source          = "../modules/codePipeline"
+  pipeline_name   = "${var.pipelineName}"
   github_username = "${var.githubUserName}"
-  github_token = "${var.githubToken}"
-  github_repo = "${var.githubRepo}"
+  github_token    = "${var.githubToken}"
+  github_repo     = "${var.githubRepo}"
 }
