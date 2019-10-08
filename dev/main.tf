@@ -69,3 +69,10 @@ resource "aws_sns_topic" "dev-sns" {
   display_name = "dev${lower(var.commonTags["environment"])}"
 }
 ##--------------/cloudwatch metric alerts for cloudfront
+#=====pipeline stuff
+module "codepipeline" {
+  pipeline_name = "${var.pipelineName}"
+  github_username = "${var.githubUserName}"
+  github_token = "${var.githubToken}"
+  github_repo = "${var.githubRepo}"
+}
