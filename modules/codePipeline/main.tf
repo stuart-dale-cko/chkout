@@ -14,6 +14,10 @@ data "aws_iam_policy_document" "codepipeline_assume_policy" {
     }
   }
 }
+resource "aws_iam_role" "codepipeline_role" {
+  name               = "${var.pipeline_name}-codepipeline-role"
+  assume_role_policy = "${data.aws_iam_policy_document.codepipeline_assume_policy.json}"
+}
 
 resource "aws_iam_role_policy" "attach_codepipeline_policy" {
   name = "${var.pipeline_name}-codepipeline-policy"
