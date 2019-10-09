@@ -4,21 +4,21 @@
 
 To host a static website on AWS S3 with a Cloudfront distribution, Includes the following
 
- *S3 to host tfstate file
- *cloudfront
- *route53
- *optional AWS CodePipeline
- *cloudwatch alarm metric to report on the CF 4xx/5xx
- *SNS topic which will require a subscription to recieve email alerts
+ - S3 to host tfstate file
+ - cloudfront
+ - route53
+ - optional AWS CodePipeline
+ - cloudwatch alarm metric to report on the CF 4xx/5xx
+ - SNS topic which will require a subscription to recieve email alerts
 
 *This module also includes the creation of a public cert using AWS ACM, which is required to be hosted in US-EAST-1, failing to do this first will lead to the cloudfront_distro failure.*
 
 ## Prerequisite
 
- *An exsiting S3 bucket  - to host the tfstate backend
- *valid SSL in **us-east-1** if using the cloudfront distro
- *Terraform  version 11.x
- *AWS access keys
+ - An exsiting S3 bucket  - to host the tfstate backend
+ - valid SSL in **us-east-1** if using the cloudfront distro
+ - Terraform  version 11.x
+ - AWS access keys
 
 ## Installation
 
