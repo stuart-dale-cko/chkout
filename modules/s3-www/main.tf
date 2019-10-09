@@ -1,3 +1,5 @@
+
+//next level add OAI between cloudfront and s3, update acl to private and set policy to to use oai 
 ##----------s3 to host a static site
 resource "aws_s3_bucket" "www" {
   bucket = "${var.bucketName}"
@@ -24,7 +26,7 @@ data "aws_iam_policy_document" "www_s3_policyDoc" {
 
     principals {
       type        = "AWS"
-      identifiers = ["*"]
+      identifiers = ["*"] //set oai here
     }
 
     actions   = ["s3:GetObject"]
