@@ -1,3 +1,5 @@
+//no logging enabled, set to s3log if required
+
 resource "aws_cloudfront_distribution" "Devsite" {
   origin {
     custom_origin_config {
