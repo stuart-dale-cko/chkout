@@ -22,10 +22,11 @@ To host a static website on AWS S3 with a Cloudfront distribution, Includes the 
  Set access keys in .aws config file or as an $ENV var powershell
 
 ```bash
-$env:AWS_ACCESS_KEY_ID = "key_id_here"
+$env:AWS_ACCESS_KEY_ID     = "key_id_here"
 $env:AWS_SECRET_ACCESS_KEY = "secret_here"
-$env:AWS_DEFAULT_REGION = "eu-west-1"
+$env:AWS_DEFAULT_REGION    = "eu-west-1"
 ```
+
 comment out unrequired modules with a preceeding #
 ie
 
@@ -37,3 +38,11 @@ ie
 
 run terraform init if all ok run terraform plan to verify what resources are to be created.
 once satisfied run terraform apply to build resources
+
+```bash
+c:\git>terraform init
+```
+
+```bash
+c:\git>terraform apply
+```
