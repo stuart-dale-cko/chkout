@@ -62,6 +62,8 @@ c:\git>terraform init
 c:\git>terraform apply
 ```
 
+### CodePipeline
+
 Using Codepipeline to automate the deployment to the S3 static bucket, using a seperate repo ensure it has a **buildspec.yml** in the root of the repo
 with the details of the s3bucket which hosts the static website.
 
