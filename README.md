@@ -61,6 +61,10 @@ c:\git>terraform init
 ```
 
 ```bash
+c:\git>terraform plan
+```
+
+```bash
 c:\git>terraform apply
 ```
 
