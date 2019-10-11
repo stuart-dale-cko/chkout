@@ -21,6 +21,12 @@ To host a static website on AWS S3 with a Cloudfront distribution, Includes the 
 - AWS access keys
 - github repo with website content and buildspec.yml
 - generated github token
+- method to insert the below var inputs eg a auto.tfvars file *NB ensure this is file is part of .gitIgnore file alternativly use a flag in plan/apply
+ 
+ ```bash
+ c:\git> terraform plan -var path\to\file_with_secrets
+ ```
+ 
 
 ## Installation
 
