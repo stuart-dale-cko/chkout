@@ -106,3 +106,5 @@ create a origin group for cloud front which would allow for two s3 buckets
 
 Enable AOI access orgin identification with Cloudfront and S3
 chnage SSL to private.
+
+Create SSMparameter store entries for github keys etc encrypted requires the use of KMS
