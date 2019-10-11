@@ -1,4 +1,4 @@
-# Static Site with S3
+ # Static Site with S3
 
 ## what does this do
 
@@ -89,3 +89,14 @@ phases:
    commands:
      - echo "post_build step"
 ```
+
+## Further considerations
+
+### DR thoughts
+
+create a origin group for cloud front which would allow for two s3 buckets
+
+### Security
+
+Enable AOI access orgin identification with Cloudfront and S3
+chnage SSL to private.
