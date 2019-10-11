@@ -4,8 +4,7 @@ variable "pipeline_name" {
 
 variable "github_username" {
   type    = "string"
-  default = "kylegalbraith"
-}
+  }
 
 variable "github_token" {
   type = "string"
